@@ -1,12 +1,28 @@
-const React = require("react");
-const { useEffect } = React;
-const Cookies = require("js-cookie");
-require("./CookieWidget.css");
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import "./CookieWidget.css";
 
-const [showAnalytics, setShowAnalytics] = React.useState(true);
+const [showAnalytics, setShowAnalytics] = useState<boolean>(true);
 const cookieConsentName = "cookie_gpdr_consent";
 
-const getCookieConsentValue = () => {
+interface Props {
+  title?: string;
+  subtitle?: string;
+  text?: string;
+  editLink?: string;
+  policyLink?: string;
+  policyLinkText?: string;
+  color?: string;
+  location?: "right" | "left";
+  hideOnScrollDown?: boolean;
+  onAccept: () => void;
+  onReject: () => void;
+  cookieSecurity?: boolean;
+  acceptButtonText?: string;
+  rejectButtonText?: string;
+}
+
+export const getCookieConsentValue = (): string | undefined => {
   const cookieValue = Cookies.get(cookieConsentName);
 
   if (cookieValue === undefined) {
@@ -16,18 +32,14 @@ const getCookieConsentValue = () => {
   return cookieValue;
 };
 
-const resetCookieConsentValue = (name = cookieConsentName) => {
+export const resetCookieConsentValue = (name = cookieConsentName): void => {
   Cookies.remove(name);
 };
 
-module.exports = {
-  getCookieConsentValue,
-  resetCookieConsentValue,
-};
-const CookieWidget = (props) => {
-  const [isVisible, setIsVisible] = React.useState(false);
+const CookieWidget: React.FC<Props> = (props: any) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const _handleScroll = (e) => {
+  const _handleScroll = (e: Event): void => {
     console.log(window.scrollY);
     if (isVisible && window.scrollY > 150) {
       _onAccept();
@@ -49,7 +61,7 @@ const CookieWidget = (props) => {
     };
   }, []);
 
-  const setCookie = (cookieValue) => {
+  const setCookie = (cookieValue: string): void => {
     let { cookieSecurity } = props;
 
     if (cookieSecurity === undefined) {
@@ -63,17 +75,17 @@ const CookieWidget = (props) => {
     });
   };
 
-  const getCookieValue = () => {
+  const getCookieValue = (): string | undefined => {
     return getCookieConsentValue();
   };
 
-  const _onAccept = () => {
+  const _onAccept = (): void => {
     setCookie("accepted");
     props.onAccept();
     setIsVisible(false);
   };
 
-  const _onDecline = () => {
+  const _onDecline = (): void => {
     setCookie("declined");
     props.onReject();
     setIsVisible(false);
@@ -81,7 +93,7 @@ const CookieWidget = (props) => {
 
   if (!isVisible) return null;
 
-  const _onEditPreferences = () => {
+  const _onEditPreferences = (): void => {
     setShowAnalytics(false);
   };
   const cookieText = showAnalytics
@@ -129,13 +141,13 @@ const CookieWidget = (props) => {
           <div className="cookie_widget_switch_container">
             <span>Analytics:</span>
 
-            <label class="toggle">
+            <label className="toggle">
               <input
                 type="checkbox"
                 checked={showAnalytics}
                 onChange={() => setShowAnalytics(!showAnalytics)}
               />
-              <span class="slider"></span>
+              <span className="slider"></span>
             </label>
           </div>
         )}
@@ -171,4 +183,4 @@ const CookieWidget = (props) => {
   );
 };
 
-module.exports = CookieWidget;
+export default CookieWidget;
