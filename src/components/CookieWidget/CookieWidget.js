@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import Cookies from "js-cookie";
-import "./CookieWidget.css";
+const React = require("react");
+const { useEffect } = React;
+const Cookies = require("js-cookie");
+require("./CookieWidget.css");
 
 const [showAnalytics, setShowAnalytics] = React.useState(true);
 const cookieConsentName = "cookie_gpdr_consent";
@@ -166,4 +167,4 @@ const CookieWidget = (props) => {
   );
 };
 
-export default CookieWidget;
+module.exports = CookieWidget;
