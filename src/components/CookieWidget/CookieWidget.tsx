@@ -158,7 +158,7 @@ const CookieWidget = (props: CookieWidgetProps) => {
             target="_blank"
             style={{ color: props.color }}
           >
-            {(props.policyLinkText && !isVisible) ?? "Read the privacy policy"}
+            {(props.policyLinkText && !isVisible) ?? "Read the privacy 5policy"}
           </a>
         )}
       </div>
