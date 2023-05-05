@@ -65,6 +65,7 @@
   "files": [
     "dist"
   ],
+  "type": "module",
   "types": "dist/index.d.ts",
   "dependencies": {
     "js-cookie": "^3.0.5"
