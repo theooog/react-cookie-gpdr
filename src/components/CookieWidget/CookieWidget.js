@@ -6,7 +6,7 @@ require("./CookieWidget.css");
 const [showAnalytics, setShowAnalytics] = React.useState(true);
 const cookieConsentName = "cookie_gpdr_consent";
 
-export const getCookieConsentValue = () => {
+const getCookieConsentValue = () => {
   const cookieValue = Cookies.get(cookieConsentName);
 
   if (cookieValue === undefined) {
@@ -16,10 +16,14 @@ export const getCookieConsentValue = () => {
   return cookieValue;
 };
 
-export const resetCookieConsentValue = (name = cookieConsentName) => {
+const resetCookieConsentValue = (name = cookieConsentName) => {
   Cookies.remove(name);
 };
 
+module.exports = {
+  getCookieConsentValue,
+  resetCookieConsentValue,
+};
 const CookieWidget = (props) => {
   const [isVisible, setIsVisible] = React.useState(false);
 
