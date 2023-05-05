@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import "./CookieWidget.css";
 
-const [showAnalytics, setShowAnalytics] = useState<boolean>(true);
 const cookieConsentName = "cookie_gpdr_consent";
 
 interface Props {
@@ -37,6 +36,7 @@ export const resetCookieConsentValue = (name = cookieConsentName): void => {
 };
 
 const CookieWidget: React.FC<Props> = (props: any) => {
+  const [showAnalytics, setShowAnalytics] = useState<boolean>(true);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const _handleScroll = (e: Event): void => {
