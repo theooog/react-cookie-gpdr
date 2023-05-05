@@ -37,7 +37,7 @@ export const resetCookieConsentValue = (name = cookieConsentName) => {
 };
 
 const CookieWidget = (props: CookieWidgetProps) => {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(true);
 
   const _handleScroll = (e: Event): void => {
     console.log(window.scrollY);
