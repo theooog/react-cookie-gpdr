@@ -59,7 +59,7 @@
   "peerDependencies": {
     "react": "^18.0.0"
   },
-  "main": "src/components/CookieWidget/index.ts",
+  "main": "src/components/CookieWidget/index.js",
   "module": "dist/esm/index.js",
   "files": [
     "dist"

@@ -2,23 +2,6 @@ import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import "./CookieWidget.css";
 
-export interface CookieWidgetProps {
-  location?: "left" | "right";
-  color: string;
-  policyLink: string;
-  title?: string;
-  subtitle?: string;
-  text?: string;
-  editLink?: string;
-  policyLinkText?: string;
-  rejectButtonText?: string;
-  acceptButtonText?: string;
-  cookieSecurity?: boolean;
-  hideOnScrollDown?: boolean;
-  onAccept: () => void;
-  onReject: () => void;
-}
-
 const [showAnalytics, setShowAnalytics] = React.useState(true);
 const cookieConsentName = "cookie_gpdr_consent";
 
@@ -36,10 +19,10 @@ export const resetCookieConsentValue = (name = cookieConsentName) => {
   Cookies.remove(name);
 };
 
-const CookieWidget = (props: CookieWidgetProps) => {
-  const [isVisible, setIsVisible] = React.useState(true);
+const CookieWidget = (props) => {
+  const [isVisible, setIsVisible] = React.useState(false);
 
-  const _handleScroll = (e: Event): void => {
+  const _handleScroll = (e) => {
     console.log(window.scrollY);
     if (isVisible && window.scrollY > 150) {
       _onAccept();
@@ -61,7 +44,7 @@ const CookieWidget = (props: CookieWidgetProps) => {
     };
   }, []);
 
-  const setCookie = (cookieValue: string) => {
+  const setCookie = (cookieValue) => {
     let { cookieSecurity } = props;
 
     if (cookieSecurity === undefined) {
